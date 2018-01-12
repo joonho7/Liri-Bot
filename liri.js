@@ -33,22 +33,24 @@ if (process.argv[2] === "my-tweets") {
 }
 
 
+ 
 
+    var x = process.argv[3]
 
-
-function spot() {
+function spot(x) {
 
     var spotify = new Spotify({
         id: "c54a8c4fffcf4be7b89718ca3aa1981b",
         secret: "e316ac85c07e4f458750b87e6148577f"
     });
-    if (typeof(process.argv[3]) !== "string") {
-        process.argv[3] = "The Sign";
+   
+    if (typeof(x) !== "string") {
+        x = "The Sign";
     }
 
     spotify.search({
         type: 'track',
-        query: process.argv[3]
+        query: x
     }, function(err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
@@ -69,14 +71,16 @@ if (process.argv[2] === "spotify-this-song") {
 
 
 
-
-function movie() {
-    var omdbURL = 'http://www.omdbapi.com/?t=' + process.argv[3] + '&apikey=72d30bd0';
-
+var y = process.argv[3]
+function movie(y) {
+    var omdbURL = 'http://www.omdbapi.com/t=' + y + '&y=&plot=short&tomatoes=true&apikey=72d30bd0';
+   
     request(omdbURL, function(error, response, body) {
-        // if (typeof(process.argv[3]) !== 'string') {
-        //     process.argv[3] = 'Mr. Nobody'
-        // }
+        
+        if (typeof(y) !== 'string') {
+            y = 'Mr. Nobody'
+        }
+        
         if (!error && response.statusCode == 200) {
             var body = JSON.parse(body);
 
@@ -103,7 +107,7 @@ function doWhat(){
   fs.readFile('random.txt', "utf8", function(error, data){
     var txt = data.split(',');
 
-    Spot(txt[1]);
+    spot(txt[1]);
   });
 }
 
